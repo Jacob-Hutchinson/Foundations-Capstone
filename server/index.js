@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
-const {SERVER_PORT} = process.env
 
 const app = express()
 
@@ -11,7 +10,7 @@ app.use(cors())
 
 const {getDateList, addDateList, randomList, deleteDateList, editDate} = require('./controller')
 
-app.use(express.static(path.join(__dirname , '.public')))
+app.use(express.static(path.join(__dirname , '../public')))
 app.use(express.static('node_modules'))
 
 app.get('/', (req, res) => {
