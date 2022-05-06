@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Date Ideas</h1>
+        </div>
+    </header>
+    <br>
+    <nav>
+       <ol id="navBar">
+           <ul><a href="./home.html">Home</a></ul>
+           <ul><a href="./random.html">random</a></ul>
+       </ol>
+    </nav><br>
+    <section class="DateForm">
+        <form id="dateForm">
+            <input type="text" placeholder="Date Idea" id="nameInput">
+            <input type="text" placeholder="description" id="descriptionInput">
+            <button type="submit">submit</button>
+        </form>
+    </section>
+    <section class="dateList">
+        <div>
+            <h3>Date List</h3>
+            <div id="editDate"></div>
+            <div id="dateList"></div>
+        </div>
+    </section>
+    <section id="DateDisplay"></section>
+    <script src="/axios/dist/axios.min.js"></script>
+    <script src="./home.js"></script>
+</body>
+</html>
