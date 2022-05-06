@@ -14,7 +14,7 @@ const createDateList = (dates) => {
     randomList.appendChild(datecard)
 }
 const randomListFunction = () => {
-    axios.get('http://localhost:4747/randomList')
+    axios.get(`${baseURL}/randomList`)
    .then((res) => {
        console.log(res.data)
            createDateList(res.data)
