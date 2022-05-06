@@ -11,7 +11,6 @@ app.use(cors())
 
 const {getDateList, addDateList, randomList, deleteDateList, editDate} = require('./controller')
 
-app.get('')
 app.use(express.static('public'))
 app.use(express.static('node_modules'))
 

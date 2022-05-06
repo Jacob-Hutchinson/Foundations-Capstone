@@ -4,10 +4,10 @@ const dateForm = document.querySelector('#dateForm')
 const deleteListButton = document.querySelector('#deleteList')
 const editDateSection = document.querySelector('#editDate')
 
-const baseURL = 'https://foundations-capstone-jh.herokuapp.com'
+const baseURL = 'https://foundations-capstone-jh.herokuapp.com/'
 
 const getDates = () => {
-    axios.get(`${baseURL}/dateList`)
+    axios.get(`${baseURL}dateList`)
     .then((res)=>{ 
         console.log(res)
         for(let i = 0; i < res.data.length; i++){
@@ -73,7 +73,7 @@ const editDate = (date) => {
             description: document.querySelector('#description-input').value
         }
         console.log(updateDate)
-        axios.put(`/editDate/${date.id}`, updateDate)
+        axios.put(`${baseURL}editDate/${date.id}`, updateDate)
         .then((res) => {
             dateList.innerHTML = ``
             for(let i = 0; i < res.data.length; i++){

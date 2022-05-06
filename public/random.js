@@ -1,6 +1,8 @@
 const randomDateButton = document.querySelector('#randomDate')
 const randomList = document.querySelector('#randomList')
 
+const baseURL = 'https://foundations-capstone-jh.herokuapp.com/'
+
 const createDateList = (dates) => {
     randomList.innerHTML = ``
     const datecard = document.createElement('div')
@@ -14,7 +16,7 @@ const createDateList = (dates) => {
     randomList.appendChild(datecard)
 }
 const randomListFunction = () => {
-    axios.get(`${baseURL}/randomList`)
+    axios.get(`${baseURL}randomList`)
    .then((res) => {
        console.log(res.data)
            createDateList(res.data)
