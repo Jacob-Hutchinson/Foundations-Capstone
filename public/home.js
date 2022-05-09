@@ -52,38 +52,19 @@ const deleteDate = (dates) => {
 
 
 const editDate = (date) => {
-    console.log('editdate clicked')
+    console.log(date)
     const editForm = document.createElement('form')
 
     
     editForm.innerHTML = `
-        <input id='name-input' placeholder='name' value='${date.name}'/>
-        <input id='description-input' placeholder='description' value='${date.description}' onclick="this.select()"/>
+        <input id='name-input' placeholder='name' value='${date.name}' required/>
+        <input id='description-input' placeholder='description' value='${date.description}' onclick="this.select()" required/>
         <button>submit</button>
 
     `
     editDateSection.appendChild(editForm)
-
-
-    editForm.addEventListener('submit', (e) => {
-        
-        e.preventDefault()
-        let updateDate = {
-            name: document.querySelector('#name-input').value,
-            description: document.querySelector('#description-input').value
-        }
-        console.log(updateDate)
-        axios.put(`/editDate/${date.id}`, updateDate)
-        .then((res) => {
-            dateList.innerHTML = ``
-            for(let i = 0; i < res.data.length; i++){
-                createDateList(res.data[i])
-                editForm.remove()
-            }
-        })
-    })
-
 }
+
 
 const submitHandler = (e) => {
     e.preventDefault()
@@ -96,15 +77,19 @@ const submitHandler = (e) => {
         name: nameInput.value,
         description: descriptionInput.value 
     }
-    console.log(bodyObj)
-    axios.post(`/dateListPost`, bodyObj)
-    .then((res) => {
-        console.log(res.data)
-        dateList.innerHTML = ``
-        for(let i = 0; i < res.data.length; i++){
-            createDateList(res.data[i])
-        }
-    })
+    // console.log(bodyObj)
+    if(nameInput.value === '' || descriptionInput.value === ''){
+        alert('please enter a date')
+    }else{
+        axios.post(`/dateListPost`, bodyObj)
+        .then((res) => {
+            console.log(res.data)
+            dateList.innerHTML = ``
+            for(let i = 0; i < res.data.length; i++){
+                createDateList(res.data[i])
+            }
+        })
+    }
 
     nameInput.value = ''
     descriptionInput.value = ''

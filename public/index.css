@@ -1,6 +1,11 @@
 body {
     position: relative;
     background-color: rgb(36, 200, 254);
+    font-family: 'Times New Roman', Times, serif;
+    bottom: 100px;
+}
+h1 {
+    text-align: center;
 }
 ol {
     display: flex;
@@ -19,14 +24,25 @@ ol {
 position: absolute;
 right: 10%;
 }
+.dateForm {
+    position: relative;
+    right: 10%;
+}
 a {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 253, 253);
+}
+a:hover {
+    color: black;
 }
 button {
-    background-color: #555555;
+    background-color: #e9ffff;
     font-size: 16px;
     padding: 3px 7px;
     border-radius: 5px;
     color: black;
   border: 2px solid #555555
+}
+button:hover {
+    color: aliceblue;
+    background-color: black;
 }

@@ -1,9 +1,11 @@
 require('dotenv').config()
 const Sequelize = require('sequelize')
 
+// database_url is for the heroku push connection_string is for local data base access.
 const {DATABASE_URL} = process.env
+const {CONNECTION_STRING} = process.env
 
-const sequelize = new Sequelize(DATABASE_URL, {
+const sequelize = new Sequelize(CONNECTION_STRING, {
     dialect: 'postgres',
     dialectOptions: {
         ssl: {
@@ -20,13 +22,14 @@ module.exports = {
         `).then((dbRes => res.status(200).send(dbRes[0]))).catch(err => console.log(err))
     },
     addDateList: (req,res) => {
-        console.log(req)
+        console.log(req.body)
         let {name, description} = req.body
         sequelize.query(`
         INSERT INTO date_list (name, description)
         VALUES ('${name}', '${description}');
 
-        SELECT * FROM date_list;
+        SELECT * FROM date_list
+        ORDER BY id ASC;
         `).then((dbres) => {
             res.status(200).send(dbres[0])
         }).catch(err => console.log(err))
@@ -64,6 +67,33 @@ module.exports = {
         `).then((dbres) => {
             res.status(200).send(dbres[0])
         }).catch(err => console.log(err))
-
+    },
+    cheapList: (req, res) => {
+        sequelize.query(`
+        select * from date_cost_list
+            WHERE cost = '$'
+        `).then((dbres) => {
+            let randomIdea = Math.floor(Math.random() * dbres[0].length)
+            res.status(200).send(dbres[0][randomIdea])
+        }).catch(err => console.log(err))
+    },
+    mediumDate: (req, res) => {
+        sequelize.query(`
+        select * from date_cost_list
+            WHERE cost = '$$'
+        `).then((dbres) => {
+            let randomIdea = Math.floor(Math.random() * dbres[0].length)
+            res.status(200).send(dbres[0][randomIdea])
+        }).catch(err => console.log(err))
+    },
+    PriceyDate: (req, res) => {
+        sequelize.query(`
+        select * from date_cost_list
+            WHERE cost = '$$$'
+        `).then((dbres) => {
+            let randomIdea = Math.floor(Math.random() * dbres[0].length)
+            res.status(200).send(dbres[0][randomIdea])
+        }).catch(err => console.log(err))
     }
 }
+
