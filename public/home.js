@@ -63,8 +63,33 @@ const editDate = (date) => {
 
     `
     editDateSection.appendChild(editForm)
-}
 
+
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let nameInput = document.querySelector('#name-input').value;
+        let descriptionInput = document.querySelector('#description-input').value
+        
+        let updateDate = {
+            name: nameInput,
+            description: descriptionInput
+        }
+        if(nameInput === '' || descriptionInput === ''){
+            alert('please enter a date')
+        }else{
+            // console.log(nameInput, descriptionInput)
+            axios.put(`/editDate/${date.id}`, updateDate)
+            .then((res) => {
+                dateList.innerHTML = ``
+                for(let i = 0; i < res.data.length; i++){
+                    createDateList(res.data[i])
+                    editForm.remove()
+                }
+            })
+        }
+    })
+
+}
 
 const submitHandler = (e) => {
     e.preventDefault()
@@ -81,6 +106,7 @@ const submitHandler = (e) => {
     if(nameInput.value === '' || descriptionInput.value === ''){
         alert('please enter a date')
     }else{
+        console.log('hit post')
         axios.post(`/dateListPost`, bodyObj)
         .then((res) => {
             console.log(res.data)
